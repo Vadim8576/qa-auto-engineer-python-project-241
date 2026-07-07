@@ -1,0 +1,18 @@
+[project]
+name = "qa-auto-engineer-python-project-241"
+version = "0.1.0"
+description = "Difference calculator"
+authors = [
+  { name = "Zhukov V." }
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pytest-cov>=7.1.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.15.20",
+]
