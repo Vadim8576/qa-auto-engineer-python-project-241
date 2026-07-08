@@ -8,4 +8,4 @@ lint:
 	uv run ruff check .
 
 run:
-	uv run gendiff
+	uv run gendiff -h
