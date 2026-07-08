@@ -1,5 +1,7 @@
 import argparse
 
+import json
+
 
 def start():   
     parser = argparse.ArgumentParser(
@@ -17,7 +19,16 @@ def start():
     )
 
     args = parser.parse_args()
+    first_file = args.first_file
+    second_file = args.second_file
+    output_format = args.format
     
     print(args)
+    
+    file1 = json.load(open(f'gendiff/files/{first_file}'))
+    file2 = json.load(open(f'gendiff/files/{second_file}'))
+    
+    print(file1)
+    print(file2)
 
     
