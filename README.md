@@ -21,4 +21,4 @@ run:
 
 demo:
 
-<script src="https://asciinema.org/a/aUU7RJs5FobtCkHE.js" id="asciicast-aUU7RJs5FobtCkHE" async="true"></script>
+<a href="https://asciinema.org/a/aUU7RJs5FobtCkHE" target="_blank"><img src="https://asciinema.org/a/aUU7RJs5FobtCkHE.svg" /></a> 
