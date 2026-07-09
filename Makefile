@@ -7,5 +7,5 @@ build:
 lint:
 	uv run ruff check .
 
-run:
+help:
 	uv run gendiff -h

@@ -2,13 +2,12 @@ import json
 
 
 def generate_diff(file_path1, file_path2):
-    json1 = json.load(open(file_path1))
-    json2 = json.load(open(file_path2))
+    with open(file_path1) as f1, open(file_path2) as f2:
+        json1 = json.load(f1)
+        json2 = json.load(f2)
     
-    lines = ['{']
-    
-    keys = sorted(json1.keys() | json2.keys())
-    
+    lines = ['{']  
+    keys = sorted(set(json1.keys()) | set(json2.keys()))
     
     for key in keys:  
         if key in json1 and key in json2:
@@ -25,9 +24,5 @@ def generate_diff(file_path1, file_path2):
             lines.append(f'  + {key}: {json2[key]}')
     
     lines.append('}')
-    
-    # for item in lines:
-    #     print(item)
-        
-    
+            
     return '\n'.join(lines)

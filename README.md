@@ -7,16 +7,26 @@
 
 
 
-install:
+install:	
 	uv sync
 
     
-build:
+build:	
 	uv build
 
 
-run:
+run:	
     uv run gendiff [file1] [file2]
+
+
+help:	
+	uv run gendiff -h
+
+	
+lint:	
+	uv run ruff check .
+
+
 
 
 demo:
