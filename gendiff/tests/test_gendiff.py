@@ -21,9 +21,8 @@ def json2():
     return load_json(FILE_PATH2)
 
 
-def test_gendiff(json1, json2): 
+def test_generate_diff(json1, json2): 
     result = generate_diff(json1, json2)
-    
     expected = [
         '{',
         '  - follow: False',
@@ -36,3 +35,55 @@ def test_gendiff(json1, json2):
     ]
     
     assert result.splitlines() == expected
+
+
+def test_identical_json(json1):
+    result = generate_diff(json1, json1)
+    expected = [
+        '{',
+        '    follow: False',
+        '    host: hexlet.io',
+        '    proxy: 123.234.53.22',
+        '    timeout: 50',
+        '}',
+    ]
+    
+    assert result.splitlines() == expected
+
+
+def test_identical_json_keys_sorted(json1):
+    result = generate_diff(json1, json1)
+    
+    assert result.splitlines()[1].startswith('    follow')
+    assert result.splitlines()[2].startswith('    host')
+    assert result.splitlines()[3].startswith('    proxy')
+    assert result.splitlines()[4].startswith('    timeout')
+
+
+def test_diff_json_keys_sorted(json1, json2):
+    result = generate_diff(json1, json2)
+    
+    assert result.splitlines()[1].startswith('  - follow')
+    assert result.splitlines()[2].startswith('    host')
+    assert result.splitlines()[3].startswith('  - proxy')
+    assert result.splitlines()[4].startswith('  - timeout')
+    assert result.splitlines()[5].startswith('  + timeout')
+    assert result.splitlines()[6].startswith('  + verbose')
+
+
+def test_generate_diff_with_swapped_arguments(json1, json2):
+    result = generate_diff(json2, json1)
+    
+    expected = [
+        '{',
+        '  + follow: False',
+        '    host: hexlet.io',
+        '  + proxy: 123.234.53.22',
+        '  - timeout: 20',
+        '  + timeout: 50',
+        '  - verbose: True',
+        '}',
+    ]
+    
+    assert result.splitlines() == expected
+
