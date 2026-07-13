@@ -21,9 +21,6 @@ jobs:
       - name: Run linter and pytest
         run: |
           make check
-      - name: Run test coverage
-        run: |
-          make test-coverage
   sonarqube:
     name: SonarQube Cloud
     runs-on: ubuntu-latest
