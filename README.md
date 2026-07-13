@@ -1,12 +1,11 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/Vadim8576/qa-auto-engineer-python-project-241/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Vadim8576/qa-auto-engineer-python-project-241/actions)
+	
+
+[![Gendiff CI](https://github.com/Vadim8576/qa-auto-engineer-python-project-241/actions/workflows/tests.yml/badge.svg)](https://github.com/Vadim8576/qa-auto-engineer-python-project-241/actions/workflows/tests.yml)
 
 
-
-
-
-
-
+	
 install:	
 	uv sync
 
