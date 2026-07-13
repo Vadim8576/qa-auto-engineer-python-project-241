@@ -9,23 +9,19 @@
 
 	
 install:	
-	uv sync
+make install
 
     
 build:	
-	uv build
-
-
-run:	
-    uv run gendiff [file1] [file2]
+make build
 
 
 help:	
-	uv run gendiff -h
+gendiff -h
 
 	
-lint:	
-	uv run ruff check .
+tests run:	
+make check
 
 
 
