@@ -18,3 +18,5 @@ test:
 
 test-coverage:
 	uv run pytest --cov
+
+check: test lint test-coverage
