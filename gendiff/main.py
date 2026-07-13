@@ -1,6 +1,8 @@
 import argparse
 
-from gendiff import generate_diff
+from gendiff.generate_diff import generate_diff
+
+from gendiff.load_json import load_json
 
 
 def start():   
@@ -28,7 +30,11 @@ def start():
     file_path1 = f'gendiff/files/{first_file}'
     file_path2 = f'gendiff/files/{second_file}'
     
-    diff = generate_diff(file_path1, file_path2)
+    
+    json1 = load_json(file_path1)
+    json2 = load_json(file_path2)
+    
+    diff = generate_diff(json1, json2)
 
     print(diff)
     

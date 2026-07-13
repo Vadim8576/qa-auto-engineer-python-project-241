@@ -1,11 +1,4 @@
-import json
-
-
-def generate_diff(file_path1, file_path2):
-    with open(file_path1) as f1, open(file_path2) as f2:
-        json1 = json.load(f1)
-        json2 = json.load(f2)
-    
+def generate_diff(json1, json2):  
     lines = ['{']  
     keys = sorted(set(json1.keys()) | set(json2.keys()))
     
