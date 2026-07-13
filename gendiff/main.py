@@ -21,7 +21,7 @@ def start():
     args = parser.parse_args()
     first_file = args.first_file
     second_file = args.second_file
-    output_format = args.format
+    # output_format = args.format
     
     # print(args)
     

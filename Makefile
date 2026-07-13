@@ -7,5 +7,11 @@ build:
 lint:
 	uv run ruff check .
 
+fix:
+	uv run ruff check --fix
+
 help:
 	uv run gendiff -h
+
+test:
+	uv run pytest
