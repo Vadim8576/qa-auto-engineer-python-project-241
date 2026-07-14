@@ -30,8 +30,11 @@ def main():
 
     data1 = loader.load(first_file)
     data2 = loader.load(second_file)
+    print(data1)
+    print(data2)
     
     diff = generate_diff.generate(data1, data2)
+    print(diff)
 
     print(stylish.format(diff))
 

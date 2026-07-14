@@ -11,26 +11,26 @@ def generate(data1, data2):
                 diff.append({
                     "key": key,
                     "status": "unchanged",
-                    "value": data1[key],
+                    "value": str(data1[key]).lower(),
                 })
             else:
                 diff.append({
                     "key": key,
                     "status": "changed",
-                    "old_value": data1[key],
-                    "new_value": data2[key],
+                    "old_value": str(data1[key]).lower(),
+                    "new_value": str(data2[key]).lower(),
                 })
         elif in_first and not in_second:
             diff.append({
                 "key": key,
                 "status": "removed",
-                "old_value": data1[key],
+                "old_value": str(data1[key]).lower(),
             })
         elif not in_first and in_second:
             diff.append({
                 "key": key,
                 "status": "added",
-                "new_value": data2[key],
+                "new_value": str(data2[key]).lower(),
             })
 
     return diff
