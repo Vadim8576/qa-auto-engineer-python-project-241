@@ -1,25 +1,25 @@
 
+from pathlib import Path
+
 import pytest
 
 from gendiff import generate_diff, loader
 from gendiff.formatters import stylish
 
-JSON_FILE1_NAME = 'json1.json'
-JSON_FILE2_NAME = 'json2.json'
-# BASE_DIR = Path(__file__).resolve().parent.parent
-# FILES_DIR = BASE_DIR / 'files'
-# FILE_PATH1 = FILES_DIR / 'file1.json'
-# FILE_PATH2 = FILES_DIR / 'file2.json'
+BASE_DIR = Path(__file__).resolve().parent.parent
+FILES_DIR = BASE_DIR / 'tests' / 'test_data'
+FILE_PATH1 = FILES_DIR / 'json1.json'
+FILE_PATH2 = FILES_DIR / 'json2.json'
 
 
 @pytest.fixture
 def json1():
-    return loader.load(JSON_FILE1_NAME)
+    return loader.load(FILE_PATH1)
 
 
 @pytest.fixture
 def json2():
-    return loader.load(JSON_FILE2_NAME)
+    return loader.load(FILE_PATH2)
 
 
 def test_generate_diff(json1, json2): 
