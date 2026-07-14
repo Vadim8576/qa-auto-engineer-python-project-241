@@ -64,7 +64,6 @@ def test_keys_sorted(path1, path2):
     assert result.splitlines()[6].startswith('  + verbose')
     
 
-
 @pytest.mark.parametrize("path1,path2", TEST_CASES, ids=["json", "yaml"])
 def test_generate_diff_with_swapped_arguments(path1, path2):
     data1 = loader.load(str(path1))
