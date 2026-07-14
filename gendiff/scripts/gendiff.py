@@ -1,13 +1,13 @@
 
-from gendiff import generate_diff, parser
-from gendiff.formatters import stylish
+from gendiff.generate_diff import generate_diff
+from gendiff.parser import parser
 
 
 def main():
-    data1, data2 = parser.parser()
-    diff = generate_diff.generate(data1, data2)
+    data1, data2, output_format = parser()
+    diff = generate_diff(data1, data2, output_format)
 
-    print(stylish.format(diff))
+    print(diff)
 
 
 if __name__ == "__main__":

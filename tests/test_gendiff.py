@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from gendiff import generate_diff, loader
-from gendiff.formatters import stylish
+from gendiff import loader
+from gendiff.generate_diff import generate_diff
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 FILES_DIR = BASE_DIR / 'tests' / 'test_data'
@@ -19,7 +19,7 @@ TEST_CASES = [
 def test_generate_diff(path1, path2): 
     data1 = loader.load(str(path1))
     data2 = loader.load(str(path2))
-    result = stylish.format(generate_diff.generate(data1, data2))
+    result = generate_diff(data1, data2)
     expected = [
         '{',
         '  - follow: false',
@@ -37,7 +37,7 @@ def test_generate_diff(path1, path2):
 @pytest.mark.parametrize("path1,_", TEST_CASES, ids=["json", "yaml"])
 def test_identical_files(path1, _):
     data = loader.load(str(path1))
-    result = stylish.format(generate_diff.generate(data, data))
+    result = generate_diff(data, data)
     expected = [
         '{',
         '    follow: false',
@@ -54,7 +54,7 @@ def test_identical_files(path1, _):
 def test_keys_sorted(path1, path2):
     data1 = loader.load(str(path1))
     data2 = loader.load(str(path2))
-    result = stylish.format(generate_diff.generate(data1, data2))
+    result = generate_diff(data1, data2)
     
     assert result.splitlines()[1].startswith('  - follow')
     assert result.splitlines()[2].startswith('    host')
@@ -68,7 +68,7 @@ def test_keys_sorted(path1, path2):
 def test_generate_diff_with_swapped_arguments(path1, path2):
     data1 = loader.load(str(path1))
     data2 = loader.load(str(path2))
-    result = stylish.format(generate_diff.generate(data2, data1))
+    result = generate_diff(data2, data1)
     
     expected = [
         '{',

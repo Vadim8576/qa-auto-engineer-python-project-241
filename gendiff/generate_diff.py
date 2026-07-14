@@ -1,4 +1,7 @@
-def generate(data1, data2):  
+from gendiff.formatters import plain, stylish
+
+
+def generate_diff(data1, data2, frmt='stylish'):  
     keys = sorted(set(data1.keys()) | set(data2.keys()))
     diff = []
 
@@ -32,5 +35,8 @@ def generate(data1, data2):
                 "status": "added",
                 "new_value": str(data2[key]).lower(),
             })
-
-    return diff
+    
+    if frmt == 'plain':
+        return plain.format(diff)
+    
+    return stylish.format(diff)

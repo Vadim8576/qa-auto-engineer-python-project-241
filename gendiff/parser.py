@@ -13,7 +13,7 @@ def parser():
     parser.add_argument('second_file')
     parser.add_argument(
         '-f', '--format',
-        choices=['stylish', 'json'],
+        choices=['stylish', 'plain'],
         default='stylish',
         help='set format of output'
     )
@@ -21,7 +21,7 @@ def parser():
     args = parser.parse_args()
     first_file = args.first_file
     second_file = args.second_file
-    # output_format = args.format
+    output_format = args.format
     
     # print(args)
     # print(output_format)
@@ -29,4 +29,4 @@ def parser():
     data1 = loader.load(first_file)
     data2 = loader.load(second_file)
     
-    return data1, data2
+    return data1, data2, output_format
