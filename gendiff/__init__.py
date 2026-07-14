@@ -1,3 +1,3 @@
-from . import generate_diff, loader
+from . import generate_diff, loader, parser
 
-__all__ = ('generate_diff', 'loader',)
+__all__ = ('generate_diff', 'loader', 'parser',)
