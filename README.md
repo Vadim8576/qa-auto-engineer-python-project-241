@@ -26,6 +26,12 @@ make check
 
 
 
-demo:
+demo with json:
 
 <a href="https://asciinema.org/a/aUU7RJs5FobtCkHE" target="_blank"><img src="https://asciinema.org/a/aUU7RJs5FobtCkHE.svg" /></a> 
+
+
+demo with yaml:         
+
+<a href="https://asciinema.org/a/8ozkaflOE6D1nKxX" target="_blank"><img src="https://asciinema.org/a/8ozkaflOE6D1nKxX.svg" /></a>
+
