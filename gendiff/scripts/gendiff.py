@@ -1,12 +1,8 @@
 
 import argparse
 
-from gendiff import generate_diff
-
-from gendiff import loader
-
+from gendiff import generate_diff, loader
 from gendiff.formatters import stylish
-
 
 
 def main():
@@ -32,9 +28,6 @@ def main():
     print(args)
     print(output_format)
 
-    
-    
-    
     data1 = loader.load(first_file)
     data2 = loader.load(second_file)
     

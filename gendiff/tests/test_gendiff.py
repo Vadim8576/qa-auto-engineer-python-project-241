@@ -1,28 +1,29 @@
-from pathlib import Path
 
 import pytest
 
-from gendiff.generate_diff import generate_diff
-from gendiff.load_json import load_json
+from gendiff import generate_diff, loader
+from gendiff.formatters import stylish
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-FILES_DIR = BASE_DIR / 'files'
-FILE_PATH1 = FILES_DIR / 'file1.json'
-FILE_PATH2 = FILES_DIR / 'file2.json'
+JSON_FILE1_NAME = 'json1.json'
+JSON_FILE2_NAME = 'json2.json'
+# BASE_DIR = Path(__file__).resolve().parent.parent
+# FILES_DIR = BASE_DIR / 'files'
+# FILE_PATH1 = FILES_DIR / 'file1.json'
+# FILE_PATH2 = FILES_DIR / 'file2.json'
 
 
 @pytest.fixture
 def json1():
-    return load_json(FILE_PATH1)
+    return loader.load(JSON_FILE1_NAME)
 
 
 @pytest.fixture
 def json2():
-    return load_json(FILE_PATH2)
+    return loader.load(JSON_FILE2_NAME)
 
 
 def test_generate_diff(json1, json2): 
-    result = generate_diff(json1, json2)
+    result = stylish.format(generate_diff.generate(json1, json2))
     expected = [
         '{',
         '  - follow: False',
@@ -38,7 +39,7 @@ def test_generate_diff(json1, json2):
 
 
 def test_identical_json(json1):
-    result = generate_diff(json1, json1)
+    result = stylish.format(generate_diff.generate(json1, json1))
     expected = [
         '{',
         '    follow: False',
@@ -52,7 +53,7 @@ def test_identical_json(json1):
 
 
 def test_identical_json_keys_sorted(json1):
-    result = generate_diff(json1, json1)
+    result = stylish.format(generate_diff.generate(json1, json1))
     
     assert result.splitlines()[1].startswith('    follow')
     assert result.splitlines()[2].startswith('    host')
@@ -61,7 +62,7 @@ def test_identical_json_keys_sorted(json1):
 
 
 def test_diff_json_keys_sorted(json1, json2):
-    result = generate_diff(json1, json2)
+    result = stylish.format(generate_diff.generate(json1, json2))
     
     assert result.splitlines()[1].startswith('  - follow')
     assert result.splitlines()[2].startswith('    host')
@@ -72,7 +73,7 @@ def test_diff_json_keys_sorted(json1, json2):
 
 
 def test_generate_diff_with_swapped_arguments(json1, json2):
-    result = generate_diff(json2, json1)
+    result = stylish.format(generate_diff.generate(json2, json1))
     
     expected = [
         '{',

@@ -1,6 +1,7 @@
 import json
-import yaml
 from pathlib import Path
+
+import yaml
 
 
 def load(file_name):  
