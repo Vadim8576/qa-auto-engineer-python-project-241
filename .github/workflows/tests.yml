@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install uv
-          make install
+          uv sync --group dev
       - name: Run linter and pytest
         run: |
           make check
@@ -31,7 +31,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: ${{ matrix.python }}
+          python-version: '3.14'
       - name: Install tox and any other packages
         run: pip install tox
       - name: Run tox
