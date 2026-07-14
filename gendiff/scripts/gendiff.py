@@ -5,6 +5,8 @@ from gendiff import generate_diff
 
 from gendiff import loader
 
+from gendiff.formatters import stylish
+
 
 
 def main():
@@ -25,9 +27,10 @@ def main():
     args = parser.parse_args()
     first_file = args.first_file
     second_file = args.second_file
-    # output_format = args.format
+    output_format = args.format
     
     print(args)
+    print(output_format)
 
     
     
@@ -37,7 +40,7 @@ def main():
     
     diff = generate_diff.generate(data1, data2)
 
-    print(diff)
+    print(stylish.format(diff))
 
 
 if __name__ == "__main__":
