@@ -1,6 +1,8 @@
 
 from pathlib import Path
 
+import json
+
 import pytest
 
 from gendiff import loader
@@ -110,3 +112,50 @@ def test_identical_files_plain_out(path1, _):
     expected = ''
     
     assert result == expected
+    
+
+# tests json out
+
+@pytest.mark.parametrize("path1,path2", TEST_CASES, ids=["json", "yaml"])
+def test_different_files_json_out(path1, path2): 
+    data1 = loader.load(str(path1))
+    data2 = loader.load(str(path2))
+    result = generate_diff(data1, data2, 'json')
+    expected = {
+        "follow": {
+            "old_value": "false",
+            "status": "removed"
+        },
+        "host": "hexlet.io",
+        "proxy": {
+            "old_value": "123.234.53.22",
+            "status": "removed"
+        },
+        "timeout": {
+            "old_value": "50",
+            "new_value": "20",
+            "status": "changed"
+        },
+        "verbose": {
+            "new_value": "true",
+            "status": "added"
+        }
+    }
+
+    parsed_result = json.loads(result)    
+    assert parsed_result == expected
+
+
+@pytest.mark.parametrize("path1,_", TEST_CASES, ids=["json", "yaml"])
+def test_identical_files_json_out(path1, _):
+    data = loader.load(str(path1))
+    result = generate_diff(data, data, 'json')
+    expected = {
+        "follow": "false",
+        "host": "hexlet.io",
+        "proxy": "123.234.53.22",
+        "timeout": "50"
+    }
+    
+    parsed_result = json.loads(result)    
+    assert parsed_result == expected

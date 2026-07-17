@@ -1,4 +1,4 @@
-from gendiff.formatters import plain, stylish
+from gendiff.formatters import plain, stylish, json
 
 
 def generate_diff(data1, data2, frmt='stylish'):  
@@ -38,5 +38,7 @@ def generate_diff(data1, data2, frmt='stylish'):
     
     if frmt == 'plain':
         return plain.format(diff)
+    elif frmt == 'json':
+        return json.format(diff)
     
     return stylish.format(diff)
