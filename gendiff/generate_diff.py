@@ -1,7 +1,11 @@
+from gendiff import loader
 from gendiff.formatters import json, plain, stylish
 
 
-def generate_diff(data1, data2, frmt='stylish'):  
+def generate_diff(first_path, second_path, frmt='stylish'):  
+    data1 = loader.load(first_path)
+    data2 = loader.load(second_path)
+    
     keys = sorted(set(data1.keys()) | set(data2.keys()))
     diff = []
 

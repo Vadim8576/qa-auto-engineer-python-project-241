@@ -3,7 +3,6 @@ from pathlib import Path
 
 import pytest
 
-from gendiff import loader
 from gendiff.generate_diff import generate_diff
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,9 +18,7 @@ TEST_CASES = [
 
 @pytest.mark.parametrize("path1,path2", TEST_CASES, ids=["json", "yaml"])
 def test_different_files_stylish_out(path1, path2): 
-    data1 = loader.load(str(path1))
-    data2 = loader.load(str(path2))
-    result = generate_diff(data1, data2)
+    result = generate_diff(path1, path2)
     expected = [
         '{',
         '  - follow: false',
@@ -38,8 +35,7 @@ def test_different_files_stylish_out(path1, path2):
 
 @pytest.mark.parametrize("path1,_", TEST_CASES, ids=["json", "yaml"])
 def test_identical_files_stylish_out(path1, _):
-    data = loader.load(str(path1))
-    result = generate_diff(data, data)
+    result = generate_diff(path1, path1)
     expected = [
         '{',
         '    follow: false',
@@ -54,9 +50,7 @@ def test_identical_files_stylish_out(path1, _):
 
 @pytest.mark.parametrize("path1,path2", TEST_CASES, ids=["json", "yaml"])
 def test_keys_sorted_stylish_out(path1, path2):
-    data1 = loader.load(str(path1))
-    data2 = loader.load(str(path2))
-    result = generate_diff(data1, data2)
+    result = generate_diff(path1, path2)
     
     assert result.splitlines()[1].startswith('  - follow')
     assert result.splitlines()[2].startswith('    host')
@@ -68,9 +62,7 @@ def test_keys_sorted_stylish_out(path1, path2):
 
 @pytest.mark.parametrize("path1,path2", TEST_CASES, ids=["json", "yaml"])
 def test_generate_diff_with_swapped_arguments_stylish_out(path1, path2):
-    data1 = loader.load(str(path1))
-    data2 = loader.load(str(path2))
-    result = generate_diff(data2, data1)
+    result = generate_diff(path2, path1)
     
     expected = [
         '{',
@@ -90,9 +82,7 @@ def test_generate_diff_with_swapped_arguments_stylish_out(path1, path2):
 
 @pytest.mark.parametrize("path1,path2", TEST_CASES, ids=["json", "yaml"])
 def test_different_files_plain_out(path1, path2): 
-    data1 = loader.load(str(path1))
-    data2 = loader.load(str(path2))
-    result = generate_diff(data1, data2, 'plain')
+    result = generate_diff(path1, path2, 'plain')
     expected = [
         "Property 'follow' was removed",
         "Property 'proxy' was removed",
@@ -105,8 +95,7 @@ def test_different_files_plain_out(path1, path2):
 
 @pytest.mark.parametrize("path1,_", TEST_CASES, ids=["json", "yaml"])
 def test_identical_files_plain_out(path1, _):
-    data = loader.load(str(path1))
-    result = generate_diff(data, data, 'plain')
+    result = generate_diff(path1, path1, 'plain')
     expected = ''
     
     assert result == expected
@@ -116,9 +105,7 @@ def test_identical_files_plain_out(path1, _):
 
 @pytest.mark.parametrize("path1,path2", TEST_CASES, ids=["json", "yaml"])
 def test_different_files_json_out(path1, path2): 
-    data1 = loader.load(str(path1))
-    data2 = loader.load(str(path2))
-    result = generate_diff(data1, data2, 'json')
+    result = generate_diff(path1, path2, 'json')
     expected = {
         "follow": {
             "old_value": "false",
@@ -146,8 +133,7 @@ def test_different_files_json_out(path1, path2):
 
 @pytest.mark.parametrize("path1,_", TEST_CASES, ids=["json", "yaml"])
 def test_identical_files_json_out(path1, _):
-    data = loader.load(str(path1))
-    result = generate_diff(data, data, 'json')
+    result = generate_diff(path1, path1, 'json')
     expected = {
         "follow": "false",
         "host": "hexlet.io",

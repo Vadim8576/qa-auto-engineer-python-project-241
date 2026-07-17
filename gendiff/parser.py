@@ -1,7 +1,5 @@
 import argparse
 
-from gendiff import loader
-
 
 def parser():
     parser = argparse.ArgumentParser(
@@ -19,11 +17,8 @@ def parser():
     )
 
     args = parser.parse_args()
-    first_file = args.first_file
-    second_file = args.second_file
+    first_path = args.first_file
+    second_path = args.second_file
     output_format = args.format
     
-    data1 = loader.load(first_file)
-    data2 = loader.load(second_file)
-    
-    return data1, data2, output_format
+    return first_path, second_path, output_format

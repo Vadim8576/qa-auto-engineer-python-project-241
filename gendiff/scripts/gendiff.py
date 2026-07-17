@@ -4,8 +4,8 @@ from gendiff.parser import parser
 
 
 def main():
-    data1, data2, output_format = parser()
-    diff = generate_diff(data1, data2, output_format)
+    first_path, second_path, output_format = parser()
+    diff = generate_diff(first_path, second_path, output_format)
 
     print(diff)
 
