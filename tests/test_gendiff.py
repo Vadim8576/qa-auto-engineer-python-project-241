@@ -15,8 +15,10 @@ TEST_CASES = [
 ]
 
 
+# tests stylish out
+
 @pytest.mark.parametrize("path1,path2", TEST_CASES, ids=["json", "yaml"])
-def test_generate_diff(path1, path2): 
+def test_different_files_stylish_out(path1, path2): 
     data1 = loader.load(str(path1))
     data2 = loader.load(str(path2))
     result = generate_diff(data1, data2)
@@ -35,7 +37,7 @@ def test_generate_diff(path1, path2):
 
 
 @pytest.mark.parametrize("path1,_", TEST_CASES, ids=["json", "yaml"])
-def test_identical_files(path1, _):
+def test_identical_files_stylish_out(path1, _):
     data = loader.load(str(path1))
     result = generate_diff(data, data)
     expected = [
@@ -51,7 +53,7 @@ def test_identical_files(path1, _):
 
 
 @pytest.mark.parametrize("path1,path2", TEST_CASES, ids=["json", "yaml"])
-def test_keys_sorted(path1, path2):
+def test_keys_sorted_stylish_out(path1, path2):
     data1 = loader.load(str(path1))
     data2 = loader.load(str(path2))
     result = generate_diff(data1, data2)
@@ -65,7 +67,7 @@ def test_keys_sorted(path1, path2):
     
 
 @pytest.mark.parametrize("path1,path2", TEST_CASES, ids=["json", "yaml"])
-def test_generate_diff_with_swapped_arguments(path1, path2):
+def test_generate_diff_with_swapped_arguments_stylish_out(path1, path2):
     data1 = loader.load(str(path1))
     data2 = loader.load(str(path2))
     result = generate_diff(data2, data1)
@@ -83,3 +85,28 @@ def test_generate_diff_with_swapped_arguments(path1, path2):
     
     assert result.splitlines() == expected
 
+
+# tests plain out
+
+@pytest.mark.parametrize("path1,path2", TEST_CASES, ids=["json", "yaml"])
+def test_different_files_plain_out(path1, path2): 
+    data1 = loader.load(str(path1))
+    data2 = loader.load(str(path2))
+    result = generate_diff(data1, data2, 'plain')
+    expected = [
+        "Property 'follow' was removed",
+        "Property 'proxy' was removed",
+        "Property 'timeout' was updated. From 50 to 20",
+        "Property 'verbose' was added with value: true",
+    ]
+    
+    assert result.splitlines() == expected
+
+
+@pytest.mark.parametrize("path1,_", TEST_CASES, ids=["json", "yaml"])
+def test_identical_files_plain_out(path1, _):
+    data = loader.load(str(path1))
+    result = generate_diff(data, data, 'plain')
+    expected = ''
+    
+    assert result == expected
