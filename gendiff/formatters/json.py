@@ -1,5 +1,6 @@
 import json
 
+
 def format(diff):
     result = {}
 
