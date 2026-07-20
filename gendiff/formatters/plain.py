@@ -6,7 +6,6 @@ def format(diff):
         status = item['status']
 
         if status == 'removed':
-            old_value = item['old_value']
             lines.append(f"Property '{key}' was removed")
             
         elif status == 'added':
